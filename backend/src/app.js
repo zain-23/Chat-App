@@ -1,20 +1,26 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import userRouter from './routes/user.route.js';
 import dotenv from 'dotenv';
-
-// application middleware
-dotenv.config();
+import connectDB from './db/db.js';
 
 const app = express();
+// application middleware
+dotenv.config();
+app.use(express.json());
+
 const http = createServer(app);
 const io = new Server(http); // io initialize
-
+// connect to db
+connectDB();
 // get route
 app.get('/', (req, res) => {
-  console.log('Hello  World');
   res.send('Hello world');
 });
+
+// router middleware
+app.use('/api/user', userRouter);
 
 // Web Socket work
 io.on('connection', (socket) => {

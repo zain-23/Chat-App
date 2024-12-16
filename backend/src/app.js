@@ -4,11 +4,13 @@ import { Server } from 'socket.io';
 import userRouter from './routes/user.route.js';
 import dotenv from 'dotenv';
 import connectDB from './db/db.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 // application middleware
 dotenv.config();
 app.use(express.json());
+app.use(cookieParser());
 
 const http = createServer(app);
 const io = new Server(http); // io initialize

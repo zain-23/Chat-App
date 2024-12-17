@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const token = (await cookies()).get('token')?.value;
+  const token = (await cookies()).get('chat_access_token')?.value;
 
   const isAuthRoute = AUTH_ROUTES.includes(pathname);
   const isPrivateRoutes = PRIVATE_ROTES.includes(pathname);

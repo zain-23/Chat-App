@@ -15,7 +15,7 @@ const Register = asyncHandler(async (req, res) => {
   // if email already exists throw error
   const alreadyExist = await USER.findOne({ email });
   if (alreadyExist) {
-    throw new ApiError('Email already exists');
+    throw new ApiError('Email already exists', 400);
   }
   // hash the password
   const hashPassword = await bcrypt.hash(password, 10);
@@ -52,11 +52,12 @@ const Login = asyncHandler(async (req, res) => {
   // set cookies and response
   const options = {
     httpOnly: true,
-    secure: true
+    secure: true,
+    sameSite: 'lax'
   };
   return res
     .status(200)
-    .cookie('chat_access_token', options)
+    .cookie('chat_access_token', token, options)
     .json(new ApiResponse('User login', { token }, 200));
 });
 

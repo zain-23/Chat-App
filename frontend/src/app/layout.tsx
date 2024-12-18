@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Recursive } from 'next/font/google';
 import './globals.css';
 
-const poppins = Poppins({
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800'],
+const recursive = Recursive({
+  weight: ['300', '400', '500', '600', '700', '800'],
   subsets: ['latin']
 });
 
@@ -18,8 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={`${poppins.className} antialiased`}>{children}</body>
+    <html
+      lang='en'
+      className='dark'
+    >
+      <body className={`${recursive.className} antialiased`}>{children}</body>
     </html>
   );
 }

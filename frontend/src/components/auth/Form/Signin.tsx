@@ -110,9 +110,24 @@ const Signin = () => {
         <FormError message={error} />
         <FormSuccess message={success} />
       </CardContent>
-      <CardFooter>
+      <CardFooter className='flex-col'>
         <p>
-          Don&apos;t have an account <Link href={'/sign-up'}>Register</Link>
+          Don&apos;t have an account{' '}
+          <Link
+            className='hover:underline'
+            href={'/sign-up'}
+          >
+            Register
+          </Link>
+        </p>
+        <p>
+          Or{' '}
+          <Link
+            className='hover:underline'
+            href={'/auth/forgot-password'}
+          >
+            Forgot Password
+          </Link>
         </p>
       </CardFooter>
     </Card>

@@ -127,7 +127,13 @@ const Signup = () => {
       </CardContent>
       <CardFooter className='justify-center'>
         <p>
-          Already have an account <Link href={'/sign-in'}>Login</Link>
+          Already have an account{' '}
+          <Link
+            className='hover:underline'
+            href={'/sign-in'}
+          >
+            Login
+          </Link>
         </p>
       </CardFooter>
     </Card>

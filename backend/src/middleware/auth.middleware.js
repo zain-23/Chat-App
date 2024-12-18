@@ -1,9 +1,9 @@
-import asyncHandler from '../utils/asyncHandler.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
 import ApiError from '../utils/apiError.js';
 import jwt from 'jsonwebtoken';
 import { USER } from '../models/user.model.js';
 
-const verifyToken = asyncHandler(async (req, res, next) => {
+const verifyToken = asyncHandler(async (req, _, next) => {
   const token =
     req.cookies?.chat_access_token || req.header('Authorization').replace('Bearer ', '');
 

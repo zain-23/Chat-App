@@ -61,8 +61,13 @@ const Login = asyncHandler(async (req, res) => {
     .json(new ApiResponse('User login', { token }, 200));
 });
 
-const GetUser = (req, res) => {
-  return res.send('Hello');
-};
+const GetUser = asyncHandler(async (req, res) => {
+  // get login user
+  const loginUser = req.user;
+  // find all but not current user
+  const users = await USER.find({ _id: { $ne: loginUser._id } });
+  // And res all user
+  return res.status(200).json(new ApiResponse('Successfully get all user', users, 200));
+});
 
 export { Register, Login, GetUser };

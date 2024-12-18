@@ -7,8 +7,8 @@ interface ChatInboxProps {
   };
 }
 
-const ChatInbox = ({ params }: ChatInboxProps) => {
-  const id = params.id;
+const ChatInbox = async ({ params }: ChatInboxProps) => {
+  const { id } = await params;
   if (!id) notFound();
   return <div>ChatInbox {id}</div>;
 };

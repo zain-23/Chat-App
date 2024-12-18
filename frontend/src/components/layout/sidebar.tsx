@@ -1,7 +1,16 @@
+'use client';
 import { Input } from '@/components/ui/input';
+import { userInstance } from '@/lib/axios';
+import { SuccessResponse, User } from '@/lib/types';
+import { useQuery } from '@tanstack/react-query';
 import { ChatCard } from './chatCard';
 
 const Sidebar = () => {
+  const { data, error } = useQuery({
+    queryKey: ['users'],
+    queryFn: () => userInstance.get<SuccessResponse<User[]>>('/')
+  });
+  const user = data?.data.data;
   return (
     <aside className='col-span-3 h-full bg-zinc-900 relative overflow-hidden'>
       {/* i want to fixed this on top of its parent */}
@@ -14,12 +23,16 @@ const Sidebar = () => {
       </div>
       {/* i want to scroll just this */}
       <div className='overflow-y-auto h-full pb-28'>
-        {Array.from({ length: 20 }).map((_, i) => (
-          <ChatCard
-            key={i + 1}
-            i={i}
-          />
-        ))}
+        {user?.length === 0 ? (
+          <p className='text-center'>Opps! Sounds like no user register</p>
+        ) : (
+          user?.map((details) => (
+            <ChatCard
+              key={details._id}
+              {...details}
+            />
+          ))
+        )}
       </div>
     </aside>
   );
